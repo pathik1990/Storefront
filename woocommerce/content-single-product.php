@@ -61,7 +61,50 @@ if ( post_password_required() ) {
 		?>
 	</div>
 	<?php 
-	
+	$product_id = $product->get_id();
+	$specification = get_field('_product_specification',$product_id);
+	if($specification){ ?>
+		<div class="product-specification">
+			<div class="details">
+				<?php foreach ($specification as $value) { ?>
+					<div class="rows">
+						<div class="cols">
+							<div class="img"><img src="<?php echo $value['icon']; ?>"></div>
+							<div class="content">
+								<h4 class="title"><?php echo $value['title']; ?></h4>
+								<p class="desc"><?php echo $value['description']; ?></p>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+		<style type="text/css">
+			.product-specification{
+				background: #4ea8d959;
+    			padding: 20px;
+    			display: inline-block;
+			}
+			.product-specification .details{
+				display: grid;
+			    grid-template-columns: 1fr 1fr;
+			    align-items: start;
+			    column-gap: 20px;
+			    row-gap: 20px;
+			}
+			.cols {
+			    display: flex;
+			    align-items: flex-start;
+			}
+			.product-specification .cols .img{
+				width: 15%;
+			}
+			.product-specification .cols .content{
+				width: 80%;
+				margin-left: 20px;
+			}
+		</style>
+	<?php } 
 	/**
 	 * Hook: woocommerce_after_single_product_summary.
 	 *
